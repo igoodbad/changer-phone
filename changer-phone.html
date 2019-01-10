@@ -36,9 +36,11 @@
 
       setStatus() {
         if(this.status){
-          this.set("statusChanger", "Conectado");
-        }else{
+          this.set("status", false);
           this.set("statusChanger", "Desconectado");
+        }else{
+          this.set("status", true);
+          this.set("statusChanger", "Conectado");
         }
         
         this.dispatchEvent(new CustomEvent("changeStatus", {
