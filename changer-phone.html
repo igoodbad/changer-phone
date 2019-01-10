@@ -1,0 +1,52 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="changer-phone">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <button type="button" on-click="setStatus">[[statusChanger]]</button>
+  </template>
+
+  <script>
+    /**
+     * `changer-phone`
+     * Simulator changer
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ChangerPhone extends Polymer.Element {
+      static get is() { return 'changer-phone'; }
+      static get properties() {
+        return {
+          statusChanger: {
+            type: String,
+            value: 'Desconectado'
+          },
+          status: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+
+      setStatus() {
+        if(this.status){
+          this.set("statusChanger", "Conectado");
+        }else{
+          this.set("statusChanger", "Desconectado");
+        }
+        
+        this.dispatchEvent(new CustomEvent("changeStatus", {
+          detail: this.status
+        }))
+      }
+    }
+
+    window.customElements.define(ChangerPhone.is, ChangerPhone);
+  </script>
+</dom-module>
